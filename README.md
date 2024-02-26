@@ -1,4 +1,4 @@
-# Laporan Proyek Credit Risk Prediction - Syahvan Alviansyah
+# Laporan Proyek _Credit Risk Prediction_ - Syahvan Alviansyah
 
 ## Domain Proyek
 
@@ -31,7 +31,7 @@ Dengan demikian, risiko kredit memiliki dampak yang sangat nyata dan langsung te
 Berdasarkan latar belakang di atas, berikut ini batasan masalah yang dapat diselesaikan dengan proyek ini:
 - Bagaimana mengembangkan model prediksi yang dapat memproyeksikan kemungkinan seorang peminjam untuk melunasi pinjaman di masa depan?
 - Bagaimana meningkatkan keputusan pemberian pinjaman dengan mengurangi risiko kredit yang tidak diinginkan?
-- Bagaimana cara menentukan hasil prediksi suatu algoritma machine learning dapat dikatakan baik?
+- Bagaimana cara menentukan hasil prediksi suatu algoritma _machine learning_ dapat dikatakan baik?
 
 ### Goals
 
@@ -42,7 +42,7 @@ Menjelaskan tujuan dari pernyataan masalah:
 
 ### Solution Statements
 
-- Melakukan pemodelan menggunakan beberapa algoritma machine learning seperti XGBoost dan Random Forest untuk mencapai solusi yang diinginkan.
+- Melakukan pemodelan menggunakan beberapa algoritma _machine learning_ seperti _XGBoost_ dan _Random Forest_ untuk mencapai solusi yang diinginkan.
 - Melakukan evaluasi model menggunakan classification report, AUC-ROC, dan Kolmogorov-Smirnov.
 
 ### Value Proposition
@@ -137,11 +137,33 @@ Dataset yang digunakan merupakan data credit dari tahun 2007-2014 yang berasal d
 - `total_cu_tl`: Jumlah perdagangan keuangan. 
 - `inq_last_12m`: Jumlah pertanyaan kredit dalam 12 bulan terakhir.
 
+![Gambar 1](img/heatmap.png)
+Gambar 1. _Heatmap_ Korelasi Antar Fitur pada Dataset
+
+Analisis korelasi antar variabel dapat memberikan wawasan yang berharga tentang hubungan antara berbagai fitur dalam dataset dan bagaimana hal itu dapat mempengaruhi risiko kredit. _Heatmap_ korelasi (Gambar 1) menunjukkan tingkat korelasi antar variabel dalam bentuk matriks warna, di mana warna yang lebih terang menunjukkan korelasi yang lebih tinggi.
+
+Beberapa temuan yang dapat diidentifikasi dari _heatmap_ korelasi ini adalah:
+
+1. **Korelasi Positif**:
+   - Terdapat korelasi positif yang cukup kuat antara `loan_amnt`, `funded_amnt`, dan `installment`, yang masuk akal karena pinjaman dengan jumlah yang lebih tinggi cenderung memiliki pembayaran bulanan yang lebih besar.
+   - Juga, terdapat korelasi positif antara `total_pymnt`, `total_pymnt_inv`, `total_rec_prncp`, dan `total_rec_int`, yang dapat diharapkan karena jumlah pembayaran total harus sebanding dengan jumlah pokok dan bunga yang harus dibayarkan.
+
+2. **Korelasi Negatif**:
+   - Ada korelasi negatif yang cukup jelas antara `int_rate` (suku bunga) dan `grade`, `sub_grade`, yang sesuai dengan harapan bahwa tingkat bunga yang lebih tinggi akan diberikan kepada peminjam dengan peringkat risiko yang lebih rendah.
+
+3. **Korelasi dengan `loan_status`**:
+   - Variabel `loan_status` (status pinjaman) menunjukkan korelasi yang signifikan dengan beberapa fitur seperti `total_rec_prncp` (pokok yang diterima), `last_pymnt_amnt` (jumlah pembayaran terakhir yang diterima), dan `out_prncp` (sisa pokok terutang), yang dapat diharapkan karena fitur-fitur ini terkait langsung dengan status pembayaran pinjaman.
+
+4. **Korelasi antara `dti` dan `annual_inc`**:
+   - Terdapat korelasi antara `dti` (rasio utang terhadap pendapatan) dan `annual_inc` (pendapatan tahunan), yang wajar karena pembayaran bulanan yang lebih tinggi dapat terkait dengan pendapatan yang lebih rendah dan rasio utang yang lebih tinggi.
+
+Analisis ini membantu memahami hubungan antara variabel-variabel dalam dataset dan bagaimana hubungan tersebut dapat memengaruhi risiko kredit. Misalnya, tingkat suku bunga (`int_rate`) yang lebih tinggi dapat berkorelasi dengan risiko kredit yang lebih tinggi, sementara pendapatan tahunan (`annual_inc`) yang lebih tinggi mungkin berhubungan dengan risiko kredit yang lebih rendah. Dengan pemahaman ini, perusahaan finansial dapat menggunakan informasi ini untuk mengembangkan model risiko kredit yang lebih baik dan membuat keputusan pemberian pinjaman yang lebih cerdas.
+
 ## Data Preparation
 
-Dalam data preparation, prinsip "_garbage in, garbage out_" berlaku. Artinya, jika data yang digunakan untuk melatih model tidak berkualitas baik, maka hasil prediksi dari model tersebut juga akan tidak akurat atau tidak dapat diandalkan. Dengan memastikan data yang digunakan untuk melatih model memiliki kualitas yang baik, kita dapat menghasilkan model yang lebih andal dalam memprediksi risiko kredit.
+Dalam _data preparation_, prinsip "_garbage in, garbage out_" berlaku. Artinya, jika data yang digunakan untuk melatih model tidak berkualitas baik, maka hasil prediksi dari model tersebut juga akan tidak akurat atau tidak dapat diandalkan. Dengan memastikan data yang digunakan untuk melatih model memiliki kualitas yang baik, kita dapat menghasilkan model yang lebih andal dalam memprediksi risiko kredit.
 
-Proses data preparation meliputi beberapa tahap:
+Proses _data preparation_ meliputi beberapa tahap:
 
 ### 1. Pembersihan Data
 
@@ -167,28 +189,28 @@ Proses data preparation meliputi beberapa tahap:
 
 Penentuan fitur-fitur mana yang harus dipertahankan atau dibuang untuk pemodelan biasanya didasarkan pada pemahaman domain dan eksplorasi data yang teliti. Misalnya, fitur yang merupakan identifikasi unik (seperti ID pelanggan), fitur yang memiliki nilai yang sama untuk setiap sampel, atau fitur yang tidak memiliki korelasi dengan target umumnya dianggap tidak berguna dan dibuang. Sedangkan fitur-fitur yang memiliki hubungan yang kuat dengan target atau membawa informasi yang relevan untuk pemodelan akan dipertahankan.
 
-Dengan melakukan proses data preparation dengan cermat, kita dapat memastikan bahwa model yang dikembangkan berdasarkan data yang berkualitas akan memberikan hasil prediksi yang lebih andal dan akurat dalam memprediksi risiko kredit.
+Dengan melakukan proses _data preparation_ dengan cermat, kita dapat memastikan bahwa model yang dikembangkan berdasarkan data yang berkualitas akan memberikan hasil prediksi yang lebih andal dan akurat dalam memprediksi risiko kredit.
 
 ## Modeling
 
-Untuk tahap pemodelan, digunakan dua algoritma machine learning, yakni XGBoost dan Random Forest. Berikut adalah gambaran ringkas tentang kedua algoritma tersebut:
+Untuk tahap pemodelan, digunakan dua algoritma _machine learning_, yakni _XGBoost_ dan _Random Forest_. Berikut adalah gambaran ringkas tentang kedua algoritma tersebut:
 
-### 1. XGBoost (Extreme Gradient Boosting)
+### 1. _XGBoost_ (_Extreme Gradient Boosting_)
 
-XGBoost (Extreme Gradient Boosting) adalah algoritma ensemble yang kuat dan efisien yang sering digunakan dalam kompetisi data dan aplikasi produksi. Beberapa parameter yang dapat digunakan dalam pemodelan XGBoost ini adalah:
+_XGBoost_ (_Extreme Gradient Boosting_) adalah algoritma _ensemble_ yang kuat dan efisien yang sering digunakan dalam kompetisi data dan aplikasi produksi. Beberapa parameter yang dapat digunakan dalam pemodelan _XGBoost_ ini adalah:
 
 - `learning_rate`: Menentukan seberapa besar update yang akan dilakukan pada nilai prediksi setiap kali ada iterasi.
-- `max_depth`: Menentukan kedalaman maksimum dari setiap pohon dalam ensemble.
+- `max_depth`: Menentukan kedalaman maksimum dari setiap pohon dalam _ensemble_.
 - `n_estimators`: Menentukan jumlah pohon keputusan yang akan dibangun.
 - `gamma`: Menentukan minimum penurunan kerugian yang diperlukan untuk melakukan pemisahan tambahan pada simpul pohon.
 - `subsample`: Menentukan fraksi sampel yang akan digunakan dalam setiap iterasi.
 - `colsample_bytree`: Menentukan fraksi kolom yang akan digunakan dalam setiap iterasi untuk membangun setiap pohon.
 
-Kelebihan XGBoost adalah kemampuannya dalam menangani dataset besar dengan cepat, toleran terhadap overfitting, dan memiliki fleksibilitas dalam menangani berbagai jenis data. Namun, kelemahannya adalah rentan terhadap overfitting jika parameter tidak disetel dengan benar.
+Kelebihan _XGBoost_ adalah kemampuannya dalam menangani dataset besar dengan cepat, toleran terhadap _overfitting_, dan memiliki fleksibilitas dalam menangani berbagai jenis data. Namun, kelemahannya adalah rentan terhadap _overfitting_ jika parameter tidak disetel dengan benar.
 
-### 2. Random Forest
+### 2. _Random Forest_
 
-Random Forest adalah algoritma ensemble lain yang sangat populer. Algoritma ini bekerja dengan membangun sejumlah besar pohon keputusan selama pelatihan dan menggabungkan hasil prediksi dari setiap pohon untuk menghasilkan prediksi akhir. Beberapa parameter yang dapat digunakan dalam pemodelan Random Forest ini adalah:
+_Random Forest_ adalah algoritma _ensemble_ lain yang sangat populer. Algoritma ini bekerja dengan membangun sejumlah besar pohon keputusan selama pelatihan dan menggabungkan hasil prediksi dari setiap pohon untuk menghasilkan prediksi akhir. Beberapa parameter yang dapat digunakan dalam pemodelan _Random Forest_ ini adalah:
 
 - `n_estimators`: Menentukan jumlah pohon keputusan yang akan dibangun.
 - `max_depth`: Menentukan kedalaman maksimum dari setiap pohon.
@@ -196,21 +218,21 @@ Random Forest adalah algoritma ensemble lain yang sangat populer. Algoritma ini 
 - `min_samples_leaf`: Menentukan jumlah sampel minimum yang diperlukan untuk menjadi simpul daun.
 - `max_features`: Menentukan jumlah fitur yang akan dipertimbangkan saat mencari split terbaik.
 
-Kelebihan dari Random Forest adalah kemampuannya dalam menangani data yang tidak seimbang dan rentan terhadap overfitting. Namun, kelemahannya adalah model yang dihasilkan tidak mudah diinterpretasi dibandingkan dengan model linear.
+Kelebihan dari _Random Forest_ adalah kemampuannya dalam menangani data yang tidak seimbang dan rentan terhadap _overfitting_. Namun, kelemahannya adalah model yang dihasilkan tidak mudah diinterpretasi dibandingkan dengan model linear.
 
 ### Pemilihan Model
 
-Pemilihan model terbaik antara XGBoost dan Random Forest bergantung pada karakteristik dataset dan tujuan pemodelan. Dalam kasus ini, kedua algoritma dipilih karena:
+Pemilihan model terbaik antara _XGBoost_ dan _Random Forest_ bergantung pada karakteristik dataset dan tujuan pemodelan. Dalam kasus ini, kedua algoritma dipilih karena:
 
 - Kedua algoritma ini dikenal memiliki kinerja yang baik dalam pemodelan prediksi, terutama dalam kasus klasifikasi seperti prediksi risiko kredit.
 - Keduanya memiliki kemampuan untuk menangani data yang besar dan kompleks.
-- XGBoost dan Random Forest adalah dua algoritma yang sudah terbukti dalam banyak kasus penggunaan dan kompetisi data.
+- _XGBoost_ dan _Random Forest_ adalah dua algoritma yang sudah terbukti dalam banyak kasus penggunaan dan kompetisi data.
 
-Dalam implementasi, parameter-parameter dalam model dapat disesuaikan untuk meningkatkan performa. Misalnya, untuk XGBoost, kita dapat menyesuaikan learning rate, max depth, dan jumlah estimators untuk mencari kombinasi yang optimal. Sedangkan untuk Random Forest, kita dapat menyesuaikan jumlah pohon, kedalaman maksimum, dan kriteria pemisahan.
+Dalam implementasi, parameter-parameter dalam model dapat disesuaikan untuk meningkatkan performa. Misalnya, untuk _XGBoost_, kita dapat menyesuaikan learning rate, max depth, dan jumlah estimators untuk mencari kombinasi yang optimal. Sedangkan untuk _Random Forest_, kita dapat menyesuaikan jumlah pohon, kedalaman maksimum, dan kriteria pemisahan.
 
 Berikut adalah nilai parameter yang digunakan dalam pemodelan:
 
-- **XGBoost**:
+- **_XGBoost_**:
   - `learning_rate`: 0.1
   - `max_depth`: 10
   - `n_estimators`: 100
@@ -218,7 +240,7 @@ Berikut adalah nilai parameter yang digunakan dalam pemodelan:
   - `subsample`: 0.8
   - `colsample_bytree`: 0.8
 
-- **Random Forest**:
+- **_Random Forest_**:
   - `n_estimators`: 100
   - `max_depth`: 10
   - `min_samples_split`: 2
@@ -246,31 +268,31 @@ Dalam proyek ini, kami menggunakan beberapa metrik evaluasi yang sesuai dengan k
    $$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$$
 
    - **Keuntungan**: Presisi memberikan informasi tentang seberapa baik model dalam mengidentifikasi kelas positif. Ini penting dalam kasus seperti pemberian pinjaman di mana keakuratan dalam mengidentifikasi peminjam yang akan melunasi pinjaman sangat penting.
-   - **Kerugian**: Presisi tidak mempertimbangkan false negative (FN), sehingga tidak memberikan gambaran lengkap tentang kemampuan model dalam menghindari kesalahan prediksi.
+   - **Kerugian**: Presisi tidak mempertimbangkan _false negative_ (FN), sehingga tidak memberikan gambaran lengkap tentang kemampuan model dalam menghindari kesalahan prediksi.
 
 3. **_Recall_ (Sensitivitas)**:
-   Recall mengukur seberapa baik model dalam menemukan kembali semua instansi kelas positif. Metrik ini dihitung sebagai rasio prediksi benar positif (TP) dengan total kelas positif yang sebenarnya (TP + FN).
+   _Recall_ mengukur seberapa baik model dalam menemukan kembali semua instansi kelas positif. Metrik ini dihitung sebagai rasio prediksi benar positif (TP) dengan total kelas positif yang sebenarnya (TP + FN).
    
    $$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}$$
 
-   - **Keuntungan**: Recall memberikan informasi tentang seberapa baik model dalam menemukan semua instansi kelas positif. Ini penting dalam kasus di mana mengidentifikasi semua kasus positif (misalnya, peminjam yang akan gagal membayar) lebih penting daripada mengurangi jumlah false positive (FP).
-   - **Kerugian**: Recall tidak mempertimbangkan false positive (FP), sehingga tidak memberikan gambaran lengkap tentang kemampuan model dalam menghindari kesalahan prediksi.
+   - **Keuntungan**: _Recall_ memberikan informasi tentang seberapa baik model dalam menemukan semua instansi kelas positif. Ini penting dalam kasus di mana mengidentifikasi semua kasus positif (misalnya, peminjam yang akan gagal membayar) lebih penting daripada mengurangi jumlah _false positive_ (FP).
+   - **Kerugian**: _Recall_ tidak mempertimbangkan _false positive_ (FP), sehingga tidak memberikan gambaran lengkap tentang kemampuan model dalam menghindari kesalahan prediksi.
 
-4. **F1 Score**:
-   F1 score adalah rata-rata harmonis dari presisi dan recall. Metrik ini memberikan keseimbangan antara presisi dan recall.
+4. **_F1 Score_**:
+   _F1 score_ adalah rata-rata harmonis dari presisi dan _recall_. Metrik ini memberikan keseimbangan antara presisi dan _recall_.
    
-   $$\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
+   $$\text{_F1 Score_} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
 
-   - **Keuntungan**: F1 score adalah rata-rata harmonis dari presisi dan recall, yang memberikan keseimbangan antara kedua metrik tersebut. Ini berguna saat kita ingin mencari model yang seimbang dalam menghindari false positives dan false negatives.
-   - **Kerugian**: F1 score memberi bobot yang sama pada presisi dan recall, yang mungkin tidak selalu sesuai dengan preferensi atau kebutuhan bisnis tertentu.
+   - **Keuntungan**: _F1 score_ adalah rata-rata harmonis dari presisi dan _recall_, yang memberikan keseimbangan antara kedua metrik tersebut. Ini berguna saat kita ingin mencari model yang seimbang dalam menghindari _false positive_ dan _false negative_.
+   - **Kerugian**: _F1 score_ memberi bobot yang sama pada presisi dan _recall_, yang mungkin tidak selalu sesuai dengan preferensi atau kebutuhan bisnis tertentu.
 
-5. **Area Under the Receiver Operating Characteristic (ROC-AUC)**:
+5. **_Area Under the Receiver Operating Characteristic_ (ROC-AUC)**:
    ROC-AUC mengukur kemampuan model dalam membedakan antara kelas positif dan negatif. Ini adalah area di bawah kurva ROC yang menunjukkan seberapa baik model dapat membedakan antara kelas positif dan negatif.
 
-   - **Keuntungan**: ROC-AUC mengukur kemampuan model dalam membedakan antara kelas positif dan negatif dengan memperhitungkan semua nilai threshold. Ini membuatnya cocok untuk mengevaluasi performa model di berbagai threshold.
+   - **Keuntungan**: ROC-AUC mengukur kemampuan model dalam membedakan antara kelas positif dan negatif dengan memperhitungkan semua nilai _threshold_. Ini membuatnya cocok untuk mengevaluasi performa model di berbagai _threshold_.
    - **Kerugian**: ROC-AUC tidak memberikan informasi langsung tentang keakuratan kelas positif atau negatif secara terpisah. Selain itu, ROC-AUC tidak sensitif terhadap ketidakseimbangan kelas.
 
-6. **Kolmogorov-Smirnov (KS) Statistic**:
+6. **Kolmogorov-Smirnov (KS) _Statistic_**:
    KS Statistik mengukur seberapa baik model memisahkan dua distribusi, dalam konteks ini, pembayar dan peminjam gagal. Ini sering digunakan dalam pemodelan risiko kredit untuk mengevaluasi kualitas prediksi model.
 
    - **Keuntungan**: KS Statistik mengukur seberapa baik model memisahkan dua distribusi, dalam konteks ini, pembayar dan peminjam gagal. Ini memberikan gambaran tentang seberapa baik model dalam mengidentifikasi perbedaan antara kedua kelas.
@@ -280,47 +302,54 @@ Dalam proyek ini, kami menggunakan beberapa metrik evaluasi yang sesuai dengan k
 
 Setelah melatih model menggunakan data historis dan melakukan evaluasi menggunakan metrik-metrik di atas, berikut adalah hasil proyek berdasarkan metrik evaluasi yang digunakan:
 
-Tabel 1. Evaluasi model machine learning
-| Metrics                 | XGBoost | Random Forest |
-|-------------------------|---------|---------------|
-| Akurasi                 | 0.944   | 0.942         |
-| Presisi                 | 0.946   | 0.946         |
-| Recall                  | 0.944   | 0.942         |
-| F1 Score                | 0.936   | 0.933         |
-| AUC                     | 0.910   | 0.872         |
-| Kolmogorov-Smirnov (KS) | 0.646   | 0.586         |
+Tabel 1. Evaluasi model _machine learning_
+| _Metrics_               | _XGBoost_ | _Random Forest_ |
+|-------------------------|-----------|-----------------|
+| Akurasi                 | 0.944     | 0.942           |
+| Presisi                 | 0.946     | 0.946           |
+| _Recall_                | 0.944     | 0.942           |
+| _F1 Score_              | 0.936     | 0.933           |
+| AUC                     | 0.910     | 0.872           |
+| Kolmogorov-Smirnov (KS) | 0.646     | 0.586           |
 
-|   Gambar 1. Grafik ROC Curve XGBoost   | Gambar 2. Grafik ROC Curve Random Forest |
-|----------------------------------------|------------------------------------------|
-| ![Gambar 1](img/roc-curve-xgboost.png) | ![Gambar 2](img/roc-curve-rf.png)        |
+|   Gambar 1. Grafik _ROC Curve XGBoost_   | Gambar 2. Grafik _ROC Curve Random Forest_ |
+|------------------------------------------|--------------------------------------------|
+| ![Gambar 1](img/roc-curve-_xgboost_.png) | ![Gambar 2](img/roc-curve-rf.png)          |
 
-| Gambar 3. Grafik Kolmogorov-Smirnov XGBoost | Gambar 4. Grafik Kolmogorov-Smirnov Random Forest |
-|---------------------------------------------|---------------------------------------------------|
-| ![Gambar 3](img/KS-xgb.png)                 | ![Gambar 4](img/KS-rf.png)                        |
+| Gambar 3. Grafik Kolmogorov-Smirnov _XGBoost_ | Gambar 4. Grafik Kolmogorov-Smirnov _Random Forest_ |
+|-----------------------------------------------|-----------------------------------------------------|
+| ![Gambar 3](img/KS-xgb.png)                   | ![Gambar 4](img/KS-rf.png)                          |
 
 
 #### Analisis Hasil:
 
-- **Akurasi**: Kedua model, XGBoost dan Random Forest, memiliki akurasi yang sangat tinggi, dengan nilai di atas 0.94. Ini menunjukkan bahwa kedua model mampu memprediksi dengan sangat baik kelas peminjam yang akan melunasi pinjaman dan yang akan gagal melakukannya.
+- **Akurasi**: Kedua model, _XGBoost_ dan _Random Forest_, memiliki akurasi yang sangat tinggi, dengan nilai di atas 0.94. Ini menunjukkan bahwa kedua model mampu memprediksi dengan sangat baik kelas peminjam yang akan melunasi pinjaman dan yang akan gagal melakukannya.
 
-- **Presisi dan Recall**: XGBoost dan Random Forest memiliki presisi dan recall yang seimbang, menunjukkan bahwa keduanya baik dalam memprediksi kelas positif dan negatif.
+- **Presisi dan Recall**: _XGBoost_ dan _Random Forest_ memiliki presisi dan recall yang seimbang, menunjukkan bahwa keduanya baik dalam memprediksi kelas positif dan negatif.
 
-- **F1 Score**: Keduanya memiliki F1 score yang tinggi, menunjukkan keseimbangan antara presisi dan recall.
+- **_F1 Score_**: Keduanya memiliki _F1 score_ yang tinggi, menunjukkan keseimbangan antara presisi dan recall.
 
-- **ROC-AUC**: XGBoost memiliki nilai ROC-AUC yang sedikit lebih tinggi daripada Random Forest, menunjukkan bahwa XGBoost lebih baik dalam membedakan antara kelas positif dan negatif.
+- **ROC-AUC**: _XGBoost_ memiliki nilai ROC-AUC yang sedikit lebih tinggi daripada _Random Forest_, menunjukkan bahwa _XGBoost_ lebih baik dalam membedakan antara kelas positif dan negatif.
 
-- **Kolmogorov-Smirnov (KS) Statistic**: XGBoost juga memiliki nilai KS yang lebih tinggi daripada Random Forest, menunjukkan bahwa XGBoost lebih baik dalam memisahkan dua distribusi, yaitu pembayar dan peminjam gagal.
+- **Kolmogorov-Smirnov (KS) _Statistic_**: _XGBoost_ juga memiliki nilai KS yang lebih tinggi daripada _Random Forest_, menunjukkan bahwa _XGBoost_ lebih baik dalam memisahkan dua distribusi, yaitu pembayar dan peminjam gagal.
 
-#### Potensi Overfitting:
+#### Potensi _Overfitting_:
 
-Meskipun hasil evaluasi menunjukkan performa yang sangat baik dari kedua model, ada potensi untuk overfitting terutama jika model sangat kompleks atau terlalu diperlengkapi dengan data latih. Untuk mengatasi overfitting, beberapa langkah yang dapat diambil termasuk:
+Meskipun hasil evaluasi menunjukkan performa yang sangat baik dari kedua model, ada potensi untuk _overfitting_ terutama jika model sangat kompleks atau terlalu diperlengkapi dengan data latih. Untuk mengatasi _overfitting_, beberapa langkah yang dapat diambil termasuk:
 
 - **Penyetelan Parameter**: Menyesuaikan parameter model untuk menghindari model menjadi terlalu kompleks.
 - **Validasi Silang**: Melakukan validasi silang untuk memeriksa kestabilan performa model pada data yang tidak terlihat.
 - **Regularisasi**: Menambahkan regularisasi ke model untuk mengontrol kompleksitasnya.
 - **Pemilihan Fitur**: Memilih hanya fitur-fitur yang paling relevan dan meninggalkan fitur-fitur yang tidak memberikan kontribusi signifikan dalam prediksi.
 
-Dengan melakukan langkah-langkah ini, kita dapat memastikan bahwa model yang dikembangkan tidak hanya memiliki performa yang tinggi pada data latih, tetapi juga dapat diterapkan dengan baik pada data yang tidak terlihat dan meminimalkan potensi overfitting.
+### Kesimpulan
+Berdasarkan hasil proyek dan metrik evaluasi yang digunakan, dapat disimpulkan bahwa kedua model (_XGBoost_ dan _Random Forest_) memberikan performa yang sangat baik dalam memprediksi risiko kredit berdasarkan dataset yang diberikan. Tujuan proyek ini, yaitu mengembangkan model yang dapat membantu dalam pengambilan keputusan pemberian pinjaman dengan memprediksi apakah seorang peminjam akan melunasi pinjamannya atau tidak, telah tercapai.
+
+Hasil evaluasi menunjukkan bahwa kedua model memiliki akurasi, presisi, dan _recall_ yang tinggi, serta _F1 score_ yang seimbang. Hal ini menunjukkan bahwa model mampu dengan baik dalam mengidentifikasi kedua kelas, yaitu peminjam yang akan melunasi pinjaman dan yang akan gagal melakukannya. Selain itu, nilai ROC-AUC dan KS _Statistic_ yang tinggi menunjukkan kemampuan model dalam membedakan antara kelas positif dan negatif, serta memisahkan dua distribusi, yaitu pembayar dan peminjam gagal.
+
+Dengan demikian, hasil evaluasi ini dan model yang dikembangkan dapat menjadi solusi yang efektif untuk menyelesaikan permasalahan yang sedang diselesaikan, yaitu membantu perusahaan finansial dalam mengambil keputusan pemberian pinjaman dengan memprediksi risiko kredit secara akurat. Dengan model ini, perusahaan dapat mengidentifikasi peminjam yang berisiko tinggi dan mengurangi risiko potensial dalam portofolio pinjamannya.
+
+Namun demikian, penting untuk terus memantau dan memvalidasi model ini secara berkala menggunakan data yang baru untuk memastikan bahwa performanya tetap konsisten dan relevan terhadap perubahan dalam lingkungan bisnis dan pasar keuangan. Selain itu, langkah-langkah pencegahan _overfitting_ yang disebutkan sebelumnya juga perlu diterapkan untuk memastikan kehandalan dan generalisasi model dalam situasi yang berbeda. Dengan demikian, model ini dapat menjadi alat yang berguna dan efektif bagi perusahaan dalam mengelola risiko kredit dan mengoptimalkan keputusan pemberian pinjaman.
 
 ## References
 Hasan, M. (2017). Prediksi Tingkat Kelancaran Pembayaran Kredit Bank Menggunakan Algoritma Naïve Bayes Berbasis Forward Selection. ILKOM Jurnal Ilmiah, 9(3), 317-324.
