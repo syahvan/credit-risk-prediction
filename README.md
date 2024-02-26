@@ -104,7 +104,11 @@ Dataset yang digunakan merupakan data credit dari tahun 2007-2014 yang berasal d
 - `total_cu_tl`: Jumlah perdagangan keuangan. 
 - `inq_last_12m`: Jumlah pertanyaan kredit dalam 12 bulan terakhir.
 
-![Heatmap](img/heatmap.png "Heatmap Dataset")
+<figure>
+  <img src="img/heatmap.png" alt="Deskripsi Gambar">
+  <figcaption>Heatmap Dataset</figcaption>
+</figure>
+
 
 
 ## Data Preparation
