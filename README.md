@@ -161,7 +161,7 @@ Analisis ini membantu memahami hubungan antara variabel-variabel dalam dataset d
 
 ## Data Preparation
 
-Dalam _data preparation_, prinsip "_garbage in, garbage out_" berlaku. Artinya, jika data yang digunakan untuk melatih model tidak berkualitas baik, maka hasil prediksi dari model tersebut juga akan tidak akurat atau tidak dapat diandalkan. Dengan memastikan data yang digunakan untuk melatih model memiliki kualitas yang baik, kita dapat menghasilkan model yang lebih andal dalam memprediksi risiko kredit.
+Dalam _data preparation_, prinsip **"_garbage in, garbage out_"** berlaku. Artinya, jika data yang digunakan untuk melatih model tidak berkualitas baik, maka hasil prediksi dari model tersebut juga akan tidak akurat atau tidak dapat diandalkan. Dengan memastikan data yang digunakan untuk melatih model memiliki kualitas yang baik, kita dapat menghasilkan model yang lebih andal dalam memprediksi risiko kredit.
 
 Proses _data preparation_ meliputi beberapa tahap:
 
@@ -312,13 +312,13 @@ Tabel 1. Evaluasi model _machine learning_
 | AUC                     | 0.910     | 0.872           |
 | Kolmogorov-Smirnov (KS) | 0.646     | 0.586           |
 
-|   Gambar 1. Grafik _ROC Curve XGBoost_   | Gambar 2. Grafik _ROC Curve Random Forest_ |
+|   Gambar 2. Grafik _ROC Curve XGBoost_   | Gambar 3. Grafik _ROC Curve Random Forest_ |
 |------------------------------------------|--------------------------------------------|
-| ![Gambar 1](img/roc-curve-_xgboost_.png) | ![Gambar 2](img/roc-curve-rf.png)          |
+| ![Gambar 2](img/roc-curve-xgboost.png)   | ![Gambar 3](img/roc-curve-rf.png)          |
 
-| Gambar 3. Grafik Kolmogorov-Smirnov _XGBoost_ | Gambar 4. Grafik Kolmogorov-Smirnov _Random Forest_ |
+| Gambar 4. Grafik Kolmogorov-Smirnov _XGBoost_ | Gambar 5. Grafik Kolmogorov-Smirnov _Random Forest_ |
 |-----------------------------------------------|-----------------------------------------------------|
-| ![Gambar 3](img/KS-xgb.png)                   | ![Gambar 4](img/KS-rf.png)                          |
+| ![Gambar 4](img/KS-xgb.png)                   | ![Gambar 5](img/KS-rf.png)                          |
 
 
 #### Analisis Hasil:
