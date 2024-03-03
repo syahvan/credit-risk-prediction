@@ -1,4 +1,4 @@
-# Laporan Proyek _Credit Risk Prediction_ - Syahvan Alviansyah
+# Credit Risk Prediction
 
 ## Domain Proyek
 
